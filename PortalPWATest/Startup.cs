@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebEssentials.AspNetCore.Pwa;
 
 namespace PortalPWATest
 {
@@ -24,7 +25,6 @@ namespace PortalPWATest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddProgressiveWebApp();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
