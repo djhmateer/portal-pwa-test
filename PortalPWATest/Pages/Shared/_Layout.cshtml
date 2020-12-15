@@ -11,12 +11,10 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
 
-
     <link rel="manifest" href="/manifest.json">
 
     <!-- apple home screen icon-->
     <link rel="apple-touch-icon" href="assets/apple-icon-180.png">
-
 
     <!-- deploying onto a Windows Device? I have a browserconfig.xml too -->
     <meta name="msapplication-square70x70logo" content="assets/mstile-icon-128.png">
@@ -65,16 +63,19 @@
     <link rel="apple-touch-startup-image" href="assets/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
 
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-
     <meta name="theme-color" content="#317EFB" />
 
     <!-- the service worker -->
     <script src="/script.js" defer></script>
 
+    <!-- install app A2HS -->
     <!-- https://github.com/pwa-builder/pwa-install -->
-    @*<script type="module" src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"></script>*@
+    <!-- double at to escape the at -->
+    @*<script type="module" src="https://cdn.jsdelivr.net/npm/@@pwabuilder/pwainstall"></script>*@
+
+    <!-- regular css now -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
