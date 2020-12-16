@@ -20,7 +20,11 @@ const CACHE_NAME = "offline";
 // Customize this with a different URL if needed.
 const OFFLINE_URL = "offline.html";
 
+// https://developers.google.com/web/fundamentals/primers/service-workers#install_a_service_worker
+// defining a callback
+// deciding which files we want to cache.
 self.addEventListener("install", (event) => {
+    console.log("install event");
     event.waitUntil(
         (async () => {
             const cache = await caches.open(CACHE_NAME);
@@ -35,6 +39,7 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
+    console.log("activate event");
     event.waitUntil(
         (async () => {
             // Enable navigation preload if it's supported.
@@ -50,6 +55,7 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+    console.log("fetch event");
     // We only want to call event.respondWith() if this is a navigation request
     // for an HTML page.
     if (event.request.mode === "navigate") {

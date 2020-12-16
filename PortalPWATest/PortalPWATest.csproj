@@ -5,10 +5,4 @@
     <UserSecretsId>e069d67e-603e-4652-a7a5-e6feca01fde3</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\manifestLOVE.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>
