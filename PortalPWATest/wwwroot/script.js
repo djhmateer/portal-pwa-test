@@ -50,14 +50,17 @@ window.addEventListener('load', () => {
 
 
 // https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen
+// **on old iOS browser (iPad) this will not work, so add button will be visible
+
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
 addBtn.style.display = 'none';
 
 // if app is installed, this event will not fire
-// on iOS this doesn't work, so button will never display
+// on new iOS this doesn't work, so button will never display
 window.addEventListener('beforeinstallprompt', (e) => {
-    console.log("beforeinstallprompt");
+    console.log("on a new(ish) browser that can install a PWA.. and the PWA in NOT installed yet");
+    //console.log("beforeinstallprompt");
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
     // Stash the event so it can be triggered later.
@@ -92,7 +95,26 @@ const isIos = () => {
 // Detects if device is in standalone mode
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
+if (isIos()) {
+    console.log("ios iphone/ipad/ipod detected");
+} else {
+    console.log("ios iphone/ipad/ipod NOT detected");
+}
+
+if (isInStandaloneMode()) {
+    console.log("in standalone mode");
+} else {
+    console.log("NOT in standalone mode");
+}
+
 // Checks if should display install popup notification:
 if (isIos() && !isInStandaloneMode()) {
-    this.setState({ showInstallMessage: true });
+    console.log("display iOS notification banner now");
+    window.alert("display iOS notification now");
+    //this.setState({ showInstallMessage: true });
+
+    // want to render /a2hs/installPopup1.png and 2.png
+} else {
+    console.log("do NOT display iOS install banner");
+    window.alert("do NOT display iOS notification now");
 }

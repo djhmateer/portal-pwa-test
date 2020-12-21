@@ -24,7 +24,7 @@ const OFFLINE_URL = "offline.html";
 // defining a callback
 // deciding which files we want to cache.
 self.addEventListener("install", (event) => {
-    console.log("install event");
+    //console.log("install event");
     event.waitUntil(
         (async () => {
             const cache = await caches.open(CACHE_NAME);
@@ -39,7 +39,7 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-    console.log("activate event");
+    //console.log("activate event");
     event.waitUntil(
         (async () => {
             // Enable navigation preload if it's supported.
@@ -55,7 +55,7 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-    console.log("fetch event");
+    //console.log("fetch event");
     // We only want to call event.respondWith() if this is a navigation request
     // for an HTML page.
     if (event.request.mode === "navigate") {
@@ -76,7 +76,7 @@ self.addEventListener("fetch", (event) => {
                     // due to a network error.
                     // If fetch() returns a valid HTTP response with a response code in
                     // the 4xx or 5xx range, the catch() will NOT be called.
-                    console.log("Fetch failed; returning offline page instead.", error);
+                    //console.log("Fetch failed; returning offline page instead.", error);
 
                     const cache = await caches.open(CACHE_NAME);
                     const cachedResponse = await cache.match(OFFLINE_URL);
