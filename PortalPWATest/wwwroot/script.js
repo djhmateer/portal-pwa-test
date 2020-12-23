@@ -48,19 +48,35 @@ window.addEventListener('load', () => {
 //    });
 //});
 
+// output log to screen
+// https://stackoverflow.com/questions/20256760/javascript-console-log-to-html
+(function () {
+    if (!console) {
+        console = {};
+    }
+    var old = console.log;
+    var logger = document.getElementById('log');
+    console.log = function (message) {
+        if (typeof message == 'object') {
+            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '<br />';
+        } else {
+            logger.innerHTML += message + '<br />';
+        }
+    }
+})();
+
+
 
 // https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen
 // **on old iOS browser (iPad) this will not work, so add button will be visible
-
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
+// by default turn off the add to home screen button
 addBtn.style.display = 'none';
 
-// if app is installed, this event will not fire
 // on new iOS this doesn't work, so button will never display
 window.addEventListener('beforeinstallprompt', (e) => {
-    console.log("on a new(ish) browser that can install a PWA.. and the PWA in NOT installed yet");
-    //console.log("beforeinstallprompt");
+    console.log("1. Display Add to home screen button for Chrome which will launch native prompt");
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
     // Stash the event so it can be triggered later.
@@ -76,9 +92,9 @@ window.addEventListener('beforeinstallprompt', (e) => {
         // Wait for the user to respond to the prompt
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
+                console.log('1.1 User accepted the A2HS prompt');
             } else {
-                console.log('User dismissed the A2HS prompt');
+                console.log('1.2 User dismissed the A2HS prompt');
             }
             deferredPrompt = null;
         });
@@ -95,26 +111,25 @@ const isIos = () => {
 // Detects if device is in standalone mode
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
-if (isIos()) {
-    console.log("ios iphone/ipad/ipod detected");
-} else {
-    console.log("ios iphone/ipad/ipod NOT detected");
-}
+//if (isIos()) {
+//    console.log("2.1 ios iphone/ipad/ipod detected");
+//} else {
+//    console.log("2.2 ios iphone/ipad/ipod NOT detected");
+//}
 
-if (isInStandaloneMode()) {
-    console.log("in standalone mode");
-} else {
-    console.log("NOT in standalone mode");
-}
+//if (isInStandaloneMode()) {
+//    console.log("3.1 in standalone mode");
+//} else {
+//    console.log("3.2 NOT in standalone mode");
+//}
 
 // Checks if should display install popup notification:
 if (isIos() && !isInStandaloneMode()) {
-    console.log("display iOS notification banner now");
-    window.alert("display iOS notification now");
+    console.log("4.10 isIOS and NOT Standalone mode so display iOS notification banner now");
+    console.log("4.11 Have you installed it already and opened in Safari on your iOS device?");
+    console.log("4.12 Have you opened this on Chrome or Firefox on iOS?");
     //this.setState({ showInstallMessage: true });
-
     // want to render /a2hs/installPopup1.png and 2.png
 } else {
-    console.log("do NOT display iOS install banner");
-    window.alert("do NOT display iOS notification now");
+    console.log("4.2 Do NOT display iOS install banner");
 }
